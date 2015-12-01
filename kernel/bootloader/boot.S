@@ -35,9 +35,6 @@ seta20.2:
 	movb $0xdf, %al               # 0xdf -> port 0x60
 	outb %al, $0x60
 
-	mov $0x41, %al
-	call putc
-
 	#setup GDT
 	lgdt gdtdesc
 	
@@ -49,6 +46,7 @@ seta20.2:
 
 	.code32
 start32:
+	xor %ax, %ax
 	mov $(SEG_KDATA<<3), %ax
 	mov %ax, %ds
 	mov %ax, %es
@@ -72,12 +70,3 @@ gdt:
 gdtdesc:
 	.word (gdtdesc - gdt - 1)
 	.long gdt
-
-putc:
-	mov $0x0a, %ah
-	mov $1, %cx
-	mov $0, %bh
-	int $0x10
-	ret
-
-

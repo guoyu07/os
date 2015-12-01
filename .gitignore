@@ -1,2 +1,4 @@
 kernel/boot.img
 kernel/grub.img
+kernel/kernel
+*.o

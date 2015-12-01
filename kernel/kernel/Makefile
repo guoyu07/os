@@ -1,6 +1,6 @@
 SRCS := $(wildcard *.c) $(wildcard *.S)
 OBJS := $(patsubst %.c,%.o,$(patsubst %.S,%.o,$(SRCS)))
-CFLAGS := -O2 -nostdinc -nostdlib -fno-builtin -fno-stack-protector -fno-pic -static
+CFLAGS := -O2 -nostdinc -nostdlib -fno-builtin -fno-stack-protector -fno-pic -static -ggdb
 ASFLAGS :=
 LDFLAGS := -Tkernel.ld
 

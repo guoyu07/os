@@ -1,4 +1,4 @@
-CFLAGS := -nostdinc -fno-pic -I./
+CFLAGS := -O2 -nostdinc -fno-builtin -fno-pic -fno-stack-protector -static -I./ -ggdb
 BL := boot.bin
 
 all: boot.S loader.c

@@ -1,24 +1,32 @@
 ENTRY(start)
 SECTIONS
 {
-	.text 0x10000:
+	.text : AT(0x100000)
 	{
-/*		_text=.; */
 		*(.text)
-/*		_etext=ALIGN(4096); */
 	}
-	.data ALIGN(4096):
+	PROVIDE(etext = .);
+
+	. = ALIGN(0x1000);
+	PROVIDE(data = .);
+
+	/* The whitespace around section is required, so that the section name is unambiguous. */
+	.data :
 	{
-/*		_data=.; */
 		*(.data)
 		*(.rodata)
-/*		_edata=ALIGN(4096); */
 	}
+	PROVIDE(edata = .);
+
 	.bss ALIGN(4096):
 	{
-/*		_bss=.; */
 		*(.bss)
-/*		_ebss=ALIGN(4096); */
 	}
-/*	_end=.; */
+
+	PROVIDE(end = .);
+
+	/DISCARD/ :
+	{
+		*(.eh_frame .note.GNU-stack)
+	}
 }

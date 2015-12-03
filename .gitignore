@@ -1,4 +1,5 @@
-kernel/boot.img
-kernel/grub.img
-kernel/kernel
+boot.img
+grub.img
+kernel
 *.o
+boot.bin

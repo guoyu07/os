@@ -10,7 +10,7 @@ static inline u8 inb(u16 port)
 
 static inline void insl(int port, void *addr, int cnt)
 {
-	asm volatile("cld; rep insl" :
+	asm volatile("rep insl" :
 			"=D"(addr), "=c"(cnt) :
 			"d"(port), "0"(addr), "1"(cnt) :
 			"memory", "cc");
@@ -23,7 +23,7 @@ static inline void outb(u16 port, u8 data)
 
 static inline void stosb(void *addr, int data, int cnt)
 {
-	asm volatile("cld;rep stosb" :
+	asm volatile("rep stosb" :
 			"=D" (addr), "=c"(cnt) :
 			"0"(addr), "1"(cnt), "a"(data) :
 			"memory", "cc");

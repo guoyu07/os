@@ -5,23 +5,21 @@
 
 #define SECTSIZE	(512)
 
-void readseg(u8 *, u64, u64);
+void readseg(u8 *, u32, u32);
 
 /* never return */
 void bootmain(void)
 {
 	struct elfhdr *eh;
 	struct proghdr *ph, *eph;
-	void (*entry)(void);
 	u8 *pa;
 
 	eh = (struct elfhdr *)0x10000;
 
-	readseg((u8 *)eh, 512, 0);
+	readseg((u8 *)eh, 4096, 0);
 
 	/* FIXME! ELF64 sanity check */
 
-	while (1);
 	ph = (struct proghdr *)((u8 *)eh + eh->phoff);
 	eph = ph + eh->phnum;
 
@@ -33,20 +31,14 @@ void bootmain(void)
 		}
 	}
 
-	entry = (void(*)(void))(eh->entry);
-	entry();
-}
-
-void waitdisk()
-{
-	//wait for disk ready
-	while ((inb(0x1f7) & 0xc0) != 0x40)
-		;
+	((void(*)(void))(eh->entry))();
 }
 
 void readsect(void *dest, u32 offset)
 {
-	waitdisk();
+	/* wait disk */
+	while ((inb(0x1f7) & 0xc0) != 0x40)
+		;
 
 	outb(0x1f2, 1); /* count */
 	outb(0x1f3, offset);
@@ -55,12 +47,14 @@ void readsect(void *dest, u32 offset)
 	outb(0x1f6, (offset >> 24) | 0xe0);
 	outb(0x1f7, 0x20); /* read sectors */
 
-	waitdisk();
+	/* wait disk */
+	while ((inb(0x1f7) & 0xc0) != 0x40)
+		;
 
 	insl(0x1f0, dest, SECTSIZE/4);
 }
 
-void readseg(u8 *pa, u64 sz, u64 offset)
+void readseg(u8 *pa, u32 sz, u32 offset)
 {
 	u8 *epa;
 

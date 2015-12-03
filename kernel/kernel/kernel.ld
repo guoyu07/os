@@ -1,7 +1,9 @@
-ENTRY(start)
+ENTRY(init)
 SECTIONS
 {
-	.text : AT(0x100000)
+	. = 0x100000;
+
+	.text :
 	{
 		*(.text)
 	}

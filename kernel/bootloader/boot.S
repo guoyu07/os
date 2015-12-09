@@ -15,6 +15,11 @@ start:
 	mov %ax, %es
 	mov %ax, %ss
 
+# VGA mode 320*200*8
+	mov $0x13, %al
+	mov $0x0, %ah
+	int $0x10
+
 #enable A20
 seta20.1:
 	inb $0x64, %al               # Wait for not busy
@@ -82,9 +87,9 @@ start64:
 	mov %ax, %ds
 	mov %ax, %es
 	mov %ax, %ss
-	xor %eax, %eax
-	mov %ax, %fs
-	mov %ax, %gs
+#	xor %eax, %eax
+#	mov %ax, %fs
+#	mov %ax, %gs
 
 #setup stack
 	mov $start, %rsp

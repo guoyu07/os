@@ -1,12 +1,6 @@
 /* no return */
 void init(void)
 {
-	char *i;
-	char *vram = (char *)0xa0000;
-
-	for (i = vram; i < (vram + 0xffff); i++) {
-		*i = (long)i & 0x0f;
-	}
-
+	*(unsigned short *)0xb8000 = 'Z' | 0x0700;
 	while (1) ;
 }

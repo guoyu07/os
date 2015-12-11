@@ -1,4 +1,5 @@
 boot.img
 grub.img
-*.o
 boot.bin
+*.o
+*.elf

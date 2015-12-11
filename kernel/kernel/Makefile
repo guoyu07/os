@@ -5,7 +5,7 @@ ASFLAGS :=
 LDFLAGS := -Tkernel.ld
 
 all: $(OBJS)
-	ld $(LDFLAGS) -N -o kernel $(OBJS)
+	ld $(LDFLAGS) -N -o kernel.elf $(OBJS)
 
 clean:
-	rm -f *.o kernel
+	rm -f *.o kernel.elf

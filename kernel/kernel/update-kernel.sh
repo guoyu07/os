@@ -2,4 +2,4 @@
 
 IMG=../boot.img
 
-dd if=kernel of=$IMG seek=1 conv=notrunc
+dd if=kernel.elf of=$IMG seek=1 conv=notrunc

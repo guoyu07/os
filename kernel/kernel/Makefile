@@ -1,8 +1,8 @@
 KERNEL := kernel.elf
 SRCS := $(wildcard *.c) $(wildcard *.S)
 OBJS := $(patsubst %.c,%.o,$(patsubst %.S,%.o,$(SRCS)))
-CFLAGS := -O2 -nostdinc -nostdlib -fno-builtin -fno-stack-protector -fno-pic -static -ggdb
-CFLAGS := -I../include/
+CFLAGS := -O2 -nostdinc -nostdlib -fno-builtin -fno-stack-protector -fno-pic -static -ggdb -fomit-frame-pointer
+CFLAGS += -I../include/ -I./
 ASFLAGS :=
 LDFLAGS := -Tkernel.ld
 

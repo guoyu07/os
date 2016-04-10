@@ -1,6 +1,6 @@
-#include "types.h"
-#include "x86.h"
-#include "cga.h"
+#include <types.h>
+#include <x86.h>
+#include <cga.h>
 
 /* colors
  * 0:black, 1:blue, 2:green, 3:cyan, 4:red,

@@ -3,14 +3,15 @@ SECTIONS
 {
 	. = 0x100000;
 
+	kernel_text = .;
 	.text :
 	{
 		*(.text)
 	}
-	PROVIDE(etext = .);
+	kernel_etext = .;
 
 	. = ALIGN(0x1000);
-	PROVIDE(data = .);
+	kernel_data = .;
 
 	/* The whitespace around section is required, so that the section name is unambiguous. */
 	.data :
@@ -18,14 +19,14 @@ SECTIONS
 		*(.data)
 		*(.rodata)
 	}
-	PROVIDE(edata = .);
+	kernel_edata = .;
 
 	.bss ALIGN(4096):
 	{
 		*(.bss)
 	}
 
-	PROVIDE(end = .);
+	kernel_end = .;
 
 	/DISCARD/ :
 	{
